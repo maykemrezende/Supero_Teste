@@ -5,4 +5,4 @@ Na parte do backend, foram utilizadas as tecnologias ASP.NET Core 2.1, Swagger, 
 
 A arquitetura está definida como Controller -> Serviço -> Repository, tendo também uma camada de exceções, uma de injeção de dependência e outra de validações. Na parte das controllers, todos os métodos que fazem algum tipo de persistência, com exceção da exclusão, foram implementados com base no verbo PUT. De acordo com a RFC 7231, o verbo PUT deve ser utilizado sempre que conhecemos o recurso que vai persistir os dados. Como estou passando as url's diretamente pelo front, foi utilizado o PUT. Se for necessário, é só implementar uma camada de autorização com base no JWT para blindar esse acesso ao servidor.
 
-No frontend, foi utilizado o Angular 4 com bootstrap. 
+No frontend, que está em WebClient, foi utilizado o Angular 4 com bootstrap. 
