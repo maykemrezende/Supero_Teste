@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Supero.Teste.Entidades\Supero.Teste.Entidades.csproj" />
+    <ProjectReference Include="..\Supero.Teste.Excecoes\Supero.Teste.Excecoes.csproj" />
+    <ProjectReference Include="..\Supero.Teste.QueryEspecificacoes\Supero.Teste.QueryEspecificacoes.csproj" />
+    <ProjectReference Include="..\Supero.Teste.Repository.Interface\Supero.Teste.Repository.Interface.csproj" />
+    <ProjectReference Include="..\Supero.Teste.Service.Interface\Supero.Teste.Service.Interface.csproj" />
+    <ProjectReference Include="..\Supero.Teste.Validacoes\Supero.Teste.Validacoes.csproj" />
+  </ItemGroup>
+
+</Project>

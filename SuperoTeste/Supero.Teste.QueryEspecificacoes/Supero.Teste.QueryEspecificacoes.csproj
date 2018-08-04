@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Supero.Teste.Entidades\Supero.Teste.Entidades.csproj" />
+    <ProjectReference Include="..\Supero.Teste.Repository.Interface\Supero.Teste.Repository.Interface.csproj" />
+  </ItemGroup>
+
+</Project>
