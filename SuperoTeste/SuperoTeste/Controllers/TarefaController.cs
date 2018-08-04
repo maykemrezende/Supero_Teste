@@ -58,12 +58,12 @@ namespace Supero.Teste.API.Controllers
             }
         }
 
-        [HttpPut("ExcluiTarefa")]
-        public IActionResult ExcluiTarefa([FromBody]Tarefa tarefa)
+        [HttpDelete("ExcluiTarefa/{id}")]
+        public IActionResult ExcluiTarefa(int id)
         {
             try
             {
-                if (tarefaService.Exclui(tarefa))
+                if (tarefaService.Exclui(id))
                 {
                     return Ok();
                 }
@@ -95,6 +95,23 @@ namespace Supero.Teste.API.Controllers
             if (tarefa != default(Tarefa))
             { 
                 return Ok(tarefa);
+            }
+
+            return BadRequest(
+                new TarefaException(TarefaExceptionEnum.TAREFA_INEXISTENTE.Codigo,
+                                    TarefaExceptionEnum.TAREFA_INEXISTENTE.Valor)
+                                    );
+        }
+
+        [HttpGet("AlterarStatusTarefa/{id}/{status}")]
+        public IActionResult AlterarStatusTarefa(int id, bool status)
+        {
+            Tarefa tarefa = tarefaService.PesquisaTarefaPor(id);
+
+            if (tarefa != default(Tarefa))
+            {
+                tarefaService.AlteraStatusTarefa(id, status);
+                return Ok();
             }
 
             return BadRequest(

@@ -1,0 +1,26 @@
+<h1>Editar tarefa</h1>
+
+<div class="well">
+  <form #tarefaForm="ngForm">
+    <div class="form-group">
+      <label for="titulo">Tarefa:</label>
+      <input type="text" id="titulo" name="titulo" class="form-control" [(ngModel)]="tarefa.titulo"
+        #titulo="ngModel" maxlength="20" required> 
+      <div *ngIf="titulo.errors" class="alert alert-danger">
+        <div [hidden]="!titulo.errors.required">
+          A tarefa &eacute; obrigat&oacute;ria.
+        </div>
+        <div [hidden]="!titulo.errors.maxlength" >
+          O t&iacute;tulo da tarefa deve conter o máximo de 20 caracteres.
+        </div>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <input type="submit" class="btn btn-success" (click)="editarTarefa()" value="Salvar" 
+      [disabled]="!tarefaForm.form.valid">
+      <a [routerLink]="['/tarefas']" class="btn btn-default">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Voltar
+      </a>
+    </div>
+  </form>
+</div>

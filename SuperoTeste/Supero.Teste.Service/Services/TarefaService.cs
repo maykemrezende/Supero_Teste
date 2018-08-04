@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using Supero.Teste.Entidades;
+﻿using Supero.Teste.Entidades;
 using Supero.Teste.Entidades.Enum;
 using Supero.Teste.Excecoes.TarefaExceptions;
 using Supero.Teste.QueryEspecificacoes.TarefaEspecificacoes;
@@ -44,8 +43,9 @@ namespace Supero.Teste.Service.Services
                                         TarefaExceptionEnum.TAREFA_NULA.Valor);
         }
 
-        public bool Exclui(Tarefa tarefa)
+        public bool Exclui(int id)
         {
+            Tarefa tarefa = PesquisaTarefaPor(id);
             if (TarefaNaoNula(tarefa))
             {
                 return tarefaRepositorio.Exclui(tarefa);
@@ -65,6 +65,19 @@ namespace Supero.Teste.Service.Services
         public IReadOnlyList<Tarefa> RetornaTodasTarefas()
         {
             return tarefaRepositorio.RetornaTodosRegistros();
+        }
+
+        public bool AlteraStatusTarefa(int id, bool status)
+        {
+            Tarefa tarefa = PesquisaTarefaPor(id);
+            if (TarefaNaoNula(tarefa))
+            {
+                tarefa.EstaConcluida = status;
+                return Atualiza(tarefa);
+            }
+
+            throw new TarefaException(TarefaExceptionEnum.TAREFA_NULA.Codigo,
+                                        TarefaExceptionEnum.TAREFA_NULA.Valor);
         }
 
         public bool Salva(Tarefa tarefa)

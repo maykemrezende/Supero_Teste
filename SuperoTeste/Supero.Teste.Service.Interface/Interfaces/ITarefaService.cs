@@ -7,8 +7,9 @@ namespace Supero.Teste.Service.Interface.Interfaces
     {
         bool Salva(Tarefa tarefa);
         bool Atualiza(Tarefa tarefa);
-        bool Exclui(Tarefa tarefa);
+        bool Exclui(int id);
         IReadOnlyList<Tarefa> RetornaTodasTarefas();
         Tarefa PesquisaTarefaPor(int id);
+        bool AlteraStatusTarefa(int id, bool status);
     }
 }
