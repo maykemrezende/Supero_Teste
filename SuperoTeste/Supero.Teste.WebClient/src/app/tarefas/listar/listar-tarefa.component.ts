@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { TarefaService, Tarefa } from '../shared';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-listar-tarefa',
@@ -19,19 +20,24 @@ export class TarefaListarComponent implements OnInit {
 
   listaTarefas() {
     this.tarefaService.getTarefas()
-      .subscribe( data => {
+      .toPromise()
+      .then( data => {
         this.tarefas = data;
       });
   }
 
   excluirTarefa($event: any, tarefa: Tarefa): void {
     if (confirm('Deseja realmente excluir a tarefa "' + tarefa.titulo + '"?')) {
-      this.tarefaService.excluiTarefa(tarefa).subscribe(data => this.listaTarefas());      
+      this.tarefaService.excluiTarefa(tarefa).toPromise()
+      .then(data => this.listaTarefas())
+      .catch((data: HttpErrorResponse) => alert(data.error.Message));      
     }
   }
 
   alterarStatus(tarefa: Tarefa): void {
-    this.tarefaService.concluiTarefa(tarefa).subscribe(data => this.listaTarefas());    
+    this.tarefaService.concluiTarefa(tarefa).toPromise()
+    .then(data => this.listaTarefas())
+    .catch((data: HttpErrorResponse) => alert(data.error.Message));    
   }
 
 }

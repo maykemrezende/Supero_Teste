@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { TarefaService, Tarefa } from '../shared';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-tarefas-edicao',
@@ -26,8 +27,10 @@ export class TarefasEdicaoComponent implements OnInit {
 
   editarTarefa(): void {
     if (this.tarefaForm.form.valid) {
-      this.tarefaService.atualizaTarefa(this.tarefa);
-      this.router.navigate(['/tarefas']);
+      this.tarefaService.atualizaTarefa(this.tarefa)
+                  .toPromise()
+                  .then(data => alert("Tarefa alterada com sucesso."))
+                  .catch((data: HttpErrorResponse) => alert(data.error.Message));
     }
   }
 

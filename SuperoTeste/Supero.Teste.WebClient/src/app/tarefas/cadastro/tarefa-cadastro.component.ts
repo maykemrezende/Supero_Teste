@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm} from '@angular/forms';
 
 import { TarefaService, Tarefa } from '../shared';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-tarefa-cadastro',
@@ -23,8 +24,11 @@ export class TarefaCadastroComponent implements OnInit {
 
   salvarTarefa(): void {
     if (this.tarefaForm.form.valid) {
-      console.log(this.tarefa)
-      this.tarefaService.criaTarefa(this.tarefa).subscribe(data => this.router.navigate(["/tarefas"]));      
+      this.tarefaService.criaTarefa(this.tarefa)
+        .toPromise()
+        .then(data => alert("Tarefa incluída com sucesso."))
+        .catch((data: HttpErrorResponse) => alert(data.error.Message));      
+           
     }
   }
 
